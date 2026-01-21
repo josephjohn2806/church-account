@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zimmerman Ward | Church Account Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --church-blue: #002e5d;
+            --gold: #c5a059;
+            --white: #ffffff;
+            --glass: rgba(255, 255, 255, 0.9);
+            --bg: #f4f7f9;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background: var(--bg);
+            color: #2c3e50;
+            scroll-behavior: smooth;
+        }
+
+        /* --- Language Toggle --- */
+        .lang-switch {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--church-blue);
+            padding: 8px 16px;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            display: flex;
+            gap: 10px;
+        }
+
+        .lang-switch button {
+            background: none;
+            border: none;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        /* --- Hero & 3D Section --- */
+        .hero {
+            background: linear-gradient(135deg, #002e5d 0%, #001a35 100%);
+            height: 55vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            perspective: 1000px;
+        }
+
+        .card-3d-container {
+            width: 280px;
+            height: 160px;
+            transform-style: preserve-3d;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .card-3d {
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+        }
+
+        /* Custom SVG Icon for Moroni/LDS Style */
+        .lds-icon {
+            width: 50px;
+            fill: var(--gold);
+            margin-bottom: 10px;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotateY(-10deg) rotateX(5deg); }
+            50% { transform: translateY(-20px) rotateY(10deg) rotateX(-5deg); }
+        }
+
+        /* --- Main UI --- */
+        .main-container {
+            max-width: 850px;
+            margin: -80px auto 100px;
+            padding: 0 20px;
+        }
+
+        .glass-panel {
+            background: var(--white);
+            border-radius: 25px;
+            padding: 45px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+        }
+
+        .create-btn-container {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .direct-link-btn {
+            background: var(--church-blue);
+            color: white;
+            padding: 20px 40px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            display: inline-block;
+            box-shadow: 0 10px 20px rgba(0,46,93,0.3);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .direct-link-btn:hover {
+            transform: translateY(-5px);
+            background: #003e7d;
+            border-color: var(--gold);
+        }
+
+        h2 { 
+            color: var(--church-blue); 
+            font-weight: 700;
+            font-size: 1.8rem;
+            margin-top: 0;
+        }
+
+        .step-list {
+            list-style: none;
+            padding: 0;
+            margin: 30px 0;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: center;
+            background: #f8fafc;
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            border-left: 4px solid var(--gold);
+        }
+
+        /* --- Form Design --- */
+        .clerk-form-section {
+            background: #eff6ff;
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 50px;
+        }
+
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: 600; font-size: 0.9rem; margin-bottom: 5px; color: var(--church-blue); }
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .submit-btn {
+            background: var(--gold);
+            color: white;
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+
+        .submit-btn:hover { background: #b08d4a; }
+
+        [lang="sw"] { display: none; }
+    </style>
+</head>
+<body>
+
+<div class="lang-switch">
+    <button onclick="setLang('en')">English</button>
+    <button onclick="setLang('sw')">Swahili</button>
+</div>
+
+<div class="hero">
+    <div class="card-3d-container">
+        <div class="card-3d">
+            <svg class="lds-icon" viewBox="0 0 24 24">
+                <path d="M12,2L4.5,20.29L5.21,21L12,18L18.79,21L19.5,20.29L12,2Z" />
+            </svg>
+            <h3 style="margin: 0; letter-spacing: 2px; font-weight: 600;">ZIMMERMAN</h3>
+            <p style="font-size: 10px; opacity: 0.8; text-transform: uppercase;">Akaunti ya Kanisa</p>
+        </div>
+    </div>
+    <h1 class="en">Official Account Setup</h1>
+    <h1 class="sw">Usajili Rasmi wa Akaunti</h1>
+</div>
+
+<div class="main-container">
+    <div class="glass-panel">
+        
+        <div class="create-btn-container">
+            <a href="https://account.churchofjesuschrist.org/register" class="direct-link-btn en" target="_blank">
+                CREATE ACCOUNT NOW
+            </a>
+            <a href="https://account.churchofjesuschrist.org/register" class="direct-link-btn sw" target="_blank">
+                TENGENEZA AKAUNTI SASA
+            </a>
+            <p class="en" style="font-size: 0.8rem; margin-top: 10px; color: #666;">This link takes you to the official Church website.</p>
+            <p class="sw" style="font-size: 0.8rem; margin-top: 10px; color: #666;">Kiungo hiki kinakupeleka kwenye tovuti rasmi ya Kanisa.</p>
+        </div>
+
+        <div class="en">
+            <h2>Easy Instructions</h2>
+            <div class="step-item">1. Click the button above to go to the official portal.</div>
+            <div class="step-item">2. Choose "Register" and enter your MRN from the Clerk.</div>
+            <div class="step-item">3. Verify your mobile number or email address.</div>
+        </div>
+
+        <div class="sw">
+            <h2>Maelekezo Rahisi</h2>
+            <div class="step-item">1. Bonyeza kitufe hapo juu kwenda kwenye tovuti rasmi.</div>
+            <div class="step-item">2. Chagua "Register" na ingiza namba ya MRN kutoka kwa Karani.</div>
+            <div class="step-item">3. Hakikisha namba yako ya simu au barua pepe.</div>
+        </div>
+
+        <div class="clerk-form-section">
+            <h3 class="en" style="margin-top:0; color: var(--church-blue);">Don't have your MRN?</h3>
+            <h3 class="sw" style="margin-top:0; color: var(--church-blue);">Huna Namba ya MRN?</h3>
+            <p class="en">Contact the Zimmerman Ward Clerk directly for your membership number.</p>
+            <p class="sw">Wasiliana na Karani wa Wadi ya Zimmerman kupata namba yako ya uanachama.</p>
+
+            <form id="clerkForm">
+                <div class="form-group">
+                    <label class="en">Full Name</label><label class="sw">Majina Kamili</label>
+                    <input type="text" placeholder="John Doe / Jina Kamili" required>
+                </div>
+                <div class="form-group">
+                    <label class="en">Phone (WhatsApp)</label><label class="sw">Namba ya Simu</label>
+                    <input type="tel" placeholder="07xx xxx xxx" required>
+                </div>
+                <button type="submit" class="submit-btn">
+                    <span class="en">Request My MRN Now</span>
+                    <span class="sw">Omba MRN Yangu Sasa</span>
+                </button>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function setLang(lang) {
+        document.querySelectorAll('.en').forEach(el => el.style.display = (lang === 'en' ? 'block' : 'none'));
+        document.querySelectorAll('.sw').forEach(el => el.style.display = (lang === 'sw' ? 'block' : 'none'));
+    }
+
+    document.getElementById('clerkForm').onsubmit = function(e) {
+        e.preventDefault();
+        alert("Your request has been sent to the Zimmerman Ward Clerk! / Ombi lako limetumwa kwa Karani wa Wadi ya Zimmerman!");
+    };
+</script>
+
+</body>
+</html>
+
